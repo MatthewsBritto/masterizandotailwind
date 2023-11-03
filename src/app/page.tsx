@@ -1,6 +1,10 @@
 import { SettingsTabs } from '@/components/SettingsTabs'
 import * as Input from '@/components/Sidebar/Input.tsx'
-import { Mail } from 'lucide-react'
+import * as FileInput from '@/components/Form/FileInput'
+import { Bold, Italic, Link, List, ListOrdered, Mail } from 'lucide-react'
+import { Select } from '@/components/Form/Select'
+import SelectItem from '@/components/Form/Select/SelectItem'
+import TextArea from '@/components/Form/TextArea'
 
 export default function Home() {
   return (
@@ -38,7 +42,7 @@ export default function Home() {
           action=""
           className="mt-6 flex w-full flex-col gap-5 divide-y divide-zinc-200"
         >
-          <div className="grid-cols-form grid gap-3">
+          <div className="grid grid-cols-form gap-3">
             <label
               htmlFor="fisrtName"
               className="text-sm font-medium text-zinc-700"
@@ -56,7 +60,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label
               htmlFor="emailAdress"
               className="text-sm font-medium text-zinc-700"
@@ -76,7 +80,7 @@ export default function Home() {
             </Input.InputRoot>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label
               htmlFor="photo"
               className="text-sm font-medium text-zinc-700"
@@ -86,10 +90,15 @@ export default function Home() {
                 This will be displayed on your profile.
               </span>
             </label>
-            <div></div>
+
+            <FileInput.Root className="flex items-start gap-5">
+              <FileInput.ImagePreview />
+              <FileInput.Trigger />
+              <FileInput.Control />
+            </FileInput.Root>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label htmlFor="role" className="text-sm font-medium text-zinc-700">
               Role
             </label>
@@ -99,37 +108,99 @@ export default function Home() {
             </Input.InputRoot>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label
               htmlFor="country"
               className="text-sm font-medium text-zinc-700"
             >
               Country
             </label>
-            <div></div>
+            <Select placeholder="Select a country...">
+              <SelectItem value="br" text="Brazil" />
+              <SelectItem value="usa" text="United States" />
+            </Select>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label
-              htmlFor="tomezone"
+              htmlFor="timezone"
               className="text-sm font-medium text-zinc-700"
             >
               Timezone
             </label>
-            <div></div>
+            <Select placeholder="Select a timezone...">
+              <SelectItem
+                value="utc8"
+                text="Pacific Standart Time (UTC-08:00)"
+              />
+              <SelectItem value="utc3" text="America São Paulo (UTC-03:00)" />
+            </Select>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label htmlFor="bio" className="text-sm font-medium text-zinc-700">
               Bio
               <span className="mt-0.5 block text-sm font-normal text-zinc-500">
                 Write a short introduction.
               </span>
             </label>
-            <div></div>
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <Select defaultValue="Normal" placeholder="">
+                  <SelectItem value="normal" text="Normal Text" />
+                  <SelectItem value="md" text="Markdown" />
+                </Select>
+
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    className=" rounded-md p-2 hover:bg-zinc-100"
+                  >
+                    <Bold className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className=" rounded-md p-2 hover:bg-zinc-100"
+                  >
+                    <Italic className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className=" rounded-md p-2 hover:bg-zinc-100"
+                  >
+                    <Link className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className=" rounded-md p-2 hover:bg-zinc-100"
+                  >
+                    <List className="h-4 w-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className=" rounded-md p-2 hover:bg-zinc-100"
+                  >
+                    <ListOrdered
+                      className="h-4 w-4 text-zinc-500"
+                      strokeWidth={3}
+                    />
+                  </button>
+                </div>
+              </div>
+              <TextArea
+                id="bio"
+                defaultValue={
+                  "I'm a Front End Developer based in Ribeirão Preto, Brazil."
+                }
+              />
+            </div>
           </div>
 
-          <div className="grid-cols-form grid gap-3 pt-5">
+          <div className="grid grid-cols-form gap-3 pt-5">
             <label
               htmlFor="portfolio"
               className="text-sm font-medium text-zinc-700"
@@ -139,7 +210,12 @@ export default function Home() {
                 Share a few snippets of your work.
               </span>
             </label>
-            <div></div>
+
+            <FileInput.Root className="">
+              <FileInput.Trigger />
+              <FileInput.FilesList />
+              <FileInput.Control multiple />
+            </FileInput.Root>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-5">
